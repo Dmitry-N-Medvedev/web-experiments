@@ -7,11 +7,10 @@
 <style>
 	main {
 		position: relative;
-		max-width: 56em;
-		background-color: white;
-		padding: 2em;
-		margin: 0 auto;
-		box-sizing: border-box;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
 	}
 </style>
 

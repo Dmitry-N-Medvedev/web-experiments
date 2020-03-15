@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import OMT from "@surma/rollup-plugin-off-main-thread";
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 
@@ -20,6 +21,7 @@ export default {
 		input: config.client.input(),
 		output: config.client.output(),
 		plugins: [
+			OMT(),
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -52,7 +54,9 @@ export default {
 
 			!dev && terser({
 				module: true
-			})
+			}),
+
+			// OMT(),
 		],
 
 		onwarn,
@@ -61,7 +65,9 @@ export default {
 	server: {
 		input: config.server.input(),
 		output: Object.assign(Object.create(null), config.server.output(), { format: 'esm' }),
+		// output: config.server.output(),
 		plugins: [
+			OMT(),
 			replace({
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)
