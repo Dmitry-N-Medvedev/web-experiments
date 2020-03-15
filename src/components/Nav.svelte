@@ -59,7 +59,16 @@
 			<a aria-current='{segment === ROUTES.ABOUT ? "page" : undefined}' href='{ROUTES.ABOUT}'>about</a>
 		</li>
 		<li>
-			<a rel='prefetch' aria-current='{segment === ROUTES.EXPERIMENTS ? "page" : undefined}' href='{ROUTES.EXPERIMENTS}'>experiments</a>
+			<a
+				rel='prefetch'
+				aria-current='{segment === ROUTES.EXPERIMENTS ? "page" : undefined}'
+				href='{ROUTES.EXPERIMENTS}'
+			>
+				experiments
+			</a>
+		</li>
+		<li>
+			<a rel='prefetch' aria-current='{segment === ROUTES.BLOG ? "page" : undefined}' href='{ROUTES.BLOG}'>blog</a>
 		</li>
 	</ul>
 </nav>
