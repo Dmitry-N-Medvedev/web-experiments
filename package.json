@@ -2,6 +2,11 @@
   "name": "web-experiments",
   "description": "experimenting with developers.google.com",
   "version": "0.0.1",
+  "type": "module",
+  "engines": {
+    "node": "13.11.0"
+  },
+  "engineStrict": true,
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
@@ -12,6 +17,7 @@
     "test": "run-p --race dev cy:run"
   },
   "dependencies": {
+    "@surma/rollup-plugin-off-main-thread": "^1.4.1",
     "compression": "^1.7.4",
     "polka": "^0.5.2",
     "sirv": "^0.4.2"
@@ -31,6 +37,6 @@
     "rollup-plugin-svelte": "^5.1.1",
     "rollup-plugin-terser": "^5.3.0",
     "sapper": "^0.27.10",
-    "svelte": "^3.19.2"
+    "svelte": "^3.20.0"
   }
 }

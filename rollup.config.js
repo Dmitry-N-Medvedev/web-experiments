@@ -4,12 +4,15 @@ import commonjs from '@rollup/plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import OMT from "@surma/rollup-plugin-off-main-thread";
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
+
+import { preset_env } from './rollup.config/@babel/preset-env';
 
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
 
@@ -18,6 +21,7 @@ export default {
 		input: config.client.input(),
 		output: config.client.output(),
 		plugins: [
+			OMT(),
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -38,9 +42,7 @@ export default {
 				runtimeHelpers: true,
 				exclude: ['node_modules/@babel/**'],
 				presets: [
-					['@babel/preset-env', {
-						targets: '> 0.25%, not dead'
-					}]
+					['@babel/preset-env', preset_env]
 				],
 				plugins: [
 					'@babel/plugin-syntax-dynamic-import',
@@ -52,7 +54,9 @@ export default {
 
 			!dev && terser({
 				module: true
-			})
+			}),
+
+			// OMT(),
 		],
 
 		onwarn,
@@ -60,8 +64,10 @@ export default {
 
 	server: {
 		input: config.server.input(),
-		output: config.server.output(),
+		output: Object.assign(Object.create(null), config.server.output(), { format: 'esm' }),
+		// output: config.server.output(),
 		plugins: [
+			OMT(),
 			replace({
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)

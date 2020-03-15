@@ -9,6 +9,8 @@
 		border-bottom: 1px solid rgba(255,62,0,0.1);
 		font-weight: 300;
 		padding: 0 1em;
+
+		contain: paint;
 	}
 
 	ul {
@@ -47,6 +49,8 @@
 		text-decoration: none;
 		padding: 1em 0.5em;
 		display: block;
+
+		pointer-events: all;
 	}
 </style>
 
@@ -59,7 +63,16 @@
 			<a aria-current='{segment === ROUTES.ABOUT ? "page" : undefined}' href='{ROUTES.ABOUT}'>about</a>
 		</li>
 		<li>
-			<a rel='prefetch' aria-current='{segment === ROUTES.EXPERIMENTS ? "page" : undefined}' href='{ROUTES.EXPERIMENTS}'>experiments</a>
+			<a
+				rel='prefetch'
+				aria-current='{segment === ROUTES.EXPERIMENTS ? "page" : undefined}'
+				href='{ROUTES.EXPERIMENTS}'
+			>
+				experiments
+			</a>
+		</li>
+		<li>
+			<a rel='prefetch' aria-current='{segment === ROUTES.BLOG ? "page" : undefined}' href='{ROUTES.BLOG}'>blog</a>
 		</li>
 	</ul>
 </nav>
