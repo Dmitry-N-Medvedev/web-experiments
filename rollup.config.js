@@ -11,6 +11,8 @@ const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
+import { preset_env } from './rollup.config/@babel/preset-env';
+
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
 
 export default {
@@ -38,9 +40,7 @@ export default {
 				runtimeHelpers: true,
 				exclude: ['node_modules/@babel/**'],
 				presets: [
-					['@babel/preset-env', {
-						targets: '> 0.25%, not dead'
-					}]
+					['@babel/preset-env', preset_env]
 				],
 				plugins: [
 					'@babel/plugin-syntax-dynamic-import',
@@ -60,7 +60,7 @@ export default {
 
 	server: {
 		input: config.server.input(),
-		output: config.server.output(),
+		output: Object.assign(Object.create(null), config.server.output(), { format: 'esm' }),
 		plugins: [
 			replace({
 				'process.browser': false,

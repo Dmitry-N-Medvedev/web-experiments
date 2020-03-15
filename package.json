@@ -2,6 +2,11 @@
   "name": "web-experiments",
   "description": "experimenting with developers.google.com",
   "version": "0.0.1",
+  "type": "module",
+  "engines": {
+    "node": "13.11.0"
+  },
+  "engineStrict": true,
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
