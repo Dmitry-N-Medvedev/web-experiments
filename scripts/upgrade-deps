@@ -1,3 +1,4 @@
 #!/bin/bash
 
-pnpm --recursive update --latest
+pnpm update --latest
+pnpm install
