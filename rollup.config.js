@@ -21,7 +21,7 @@ export default {
 		input: config.client.input(),
 		output: config.client.output(),
 		plugins: [
-			OMT(),
+			// OMT(),
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -67,7 +67,7 @@ export default {
 		output: Object.assign(Object.create(null), config.server.output(), { format: 'esm' }),
 		// output: config.server.output(),
 		plugins: [
-			OMT(),
+			// OMT(),
 			replace({
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)
